@@ -1,0 +1,2 @@
+mv %{buildroot}/usr/lib/*so* %{buildroot}/usr/lib64
+#rmdir %{buildroot}/usr/lib

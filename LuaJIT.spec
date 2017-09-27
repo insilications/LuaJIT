@@ -4,7 +4,7 @@
 #
 Name     : LuaJIT
 Version  : 2.0.5
-Release  : 2
+Release  : 3
 URL      : http://luajit.org/download/LuaJIT-2.0.5.tar.gz
 Source0  : http://luajit.org/download/LuaJIT-2.0.5.tar.gz
 Summary  : Just-in-time compiler for Lua
@@ -75,13 +75,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1506439533
+export SOURCE_DATE_EPOCH=1506530471
 make V=1  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1506439533
+export SOURCE_DATE_EPOCH=1506530471
 rm -rf %{buildroot}
 %make_install
+## make_install_append content
+mv %{buildroot}/usr/lib/*so* %{buildroot}/usr/lib64
+## make_install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -113,7 +116,7 @@ rm -rf %{buildroot}
 /usr/include/luajit-2.0/luaconf.h
 /usr/include/luajit-2.0/luajit.h
 /usr/include/luajit-2.0/lualib.h
-/usr/lib/libluajit-5.1.so
+/usr/lib64/libluajit-5.1.so
 /usr/lib64/pkgconfig/luajit.pc
 
 %files doc
@@ -122,5 +125,5 @@ rm -rf %{buildroot}
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib/libluajit-5.1.so.2
-/usr/lib/libluajit-5.1.so.2.0.5
+/usr/lib64/libluajit-5.1.so.2
+/usr/lib64/libluajit-5.1.so.2.0.5
