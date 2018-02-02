@@ -4,7 +4,7 @@
 #
 Name     : LuaJIT
 Version  : 2.0.5
-Release  : 3
+Release  : 4
 URL      : http://luajit.org/download/LuaJIT-2.0.5.tar.gz
 Source0  : http://luajit.org/download/LuaJIT-2.0.5.tar.gz
 Summary  : Just-in-time compiler for Lua
