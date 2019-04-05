@@ -4,16 +4,17 @@
 #
 Name     : LuaJIT
 Version  : 2.0.5
-Release  : 5
+Release  : 6
 URL      : http://luajit.org/download/LuaJIT-2.0.5.tar.gz
 Source0  : http://luajit.org/download/LuaJIT-2.0.5.tar.gz
 Summary  : Just-in-time compiler for Lua
 Group    : Development/Tools
 License  : MIT
-Requires: LuaJIT-bin
-Requires: LuaJIT-lib
-Requires: LuaJIT-data
-Requires: LuaJIT-doc
+Requires: LuaJIT-bin = %{version}-%{release}
+Requires: LuaJIT-data = %{version}-%{release}
+Requires: LuaJIT-lib = %{version}-%{release}
+Requires: LuaJIT-license = %{version}-%{release}
+Requires: LuaJIT-man = %{version}-%{release}
 Patch1: build.patch
 
 %description
@@ -23,7 +24,8 @@ LuaJIT is a Just-In-Time (JIT) compiler for the Lua programming language.
 %package bin
 Summary: bin components for the LuaJIT package.
 Group: Binaries
-Requires: LuaJIT-data
+Requires: LuaJIT-data = %{version}-%{release}
+Requires: LuaJIT-license = %{version}-%{release}
 
 %description bin
 bin components for the LuaJIT package.
@@ -40,30 +42,39 @@ data components for the LuaJIT package.
 %package dev
 Summary: dev components for the LuaJIT package.
 Group: Development
-Requires: LuaJIT-lib
-Requires: LuaJIT-bin
-Requires: LuaJIT-data
-Provides: LuaJIT-devel
+Requires: LuaJIT-lib = %{version}-%{release}
+Requires: LuaJIT-bin = %{version}-%{release}
+Requires: LuaJIT-data = %{version}-%{release}
+Provides: LuaJIT-devel = %{version}-%{release}
 
 %description dev
 dev components for the LuaJIT package.
 
 
-%package doc
-Summary: doc components for the LuaJIT package.
-Group: Documentation
-
-%description doc
-doc components for the LuaJIT package.
-
-
 %package lib
 Summary: lib components for the LuaJIT package.
 Group: Libraries
-Requires: LuaJIT-data
+Requires: LuaJIT-data = %{version}-%{release}
+Requires: LuaJIT-license = %{version}-%{release}
 
 %description lib
 lib components for the LuaJIT package.
+
+
+%package license
+Summary: license components for the LuaJIT package.
+Group: Default
+
+%description license
+license components for the LuaJIT package.
+
+
+%package man
+Summary: man components for the LuaJIT package.
+Group: Default
+
+%description man
+man components for the LuaJIT package.
 
 
 %prep
@@ -75,16 +86,17 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1506530471
-make V=1  %{?_smp_mflags}
+export SOURCE_DATE_EPOCH=1554422960
+export LDFLAGS="${LDFLAGS} -fno-lto"
+make  %{?_smp_mflags} MULTILIB=lib64
+
 
 %install
-export SOURCE_DATE_EPOCH=1506530471
+export SOURCE_DATE_EPOCH=1554422960
 rm -rf %{buildroot}
-%make_install
-## make_install_append content
-mv %{buildroot}/usr/lib/*so* %{buildroot}/usr/lib64
-## make_install_append end
+mkdir -p %{buildroot}/usr/share/package-licenses/LuaJIT
+cp COPYRIGHT %{buildroot}/usr/share/package-licenses/LuaJIT/COPYRIGHT
+%make_install MULTILIB=lib64
 
 %files
 %defattr(-,root,root,-)
@@ -119,11 +131,15 @@ mv %{buildroot}/usr/lib/*so* %{buildroot}/usr/lib64
 /usr/lib64/libluajit-5.1.so
 /usr/lib64/pkgconfig/luajit.pc
 
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man1/*
-
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libluajit-5.1.so.2
 /usr/lib64/libluajit-5.1.so.2.0.5
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/LuaJIT/COPYRIGHT
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/luajit.1
