@@ -1,5 +1,8 @@
+libluajit-5.1.so.2:luaJIT_profile_dumpstack
+libluajit-5.1.so.2:luaJIT_profile_start
+libluajit-5.1.so.2:luaJIT_profile_stop
 libluajit-5.1.so.2:luaJIT_setmode
-libluajit-5.1.so.2:luaJIT_version_2_0_5
+libluajit-5.1.so.2:luaJIT_version_2_1_0_beta3
 libluajit-5.1.so.2:luaL_addlstring
 libluajit-5.1.so.2:luaL_addstring
 libluajit-5.1.so.2:luaL_addvalue
@@ -33,9 +36,13 @@ libluajit-5.1.so.2:luaL_optinteger
 libluajit-5.1.so.2:luaL_optlstring
 libluajit-5.1.so.2:luaL_optnumber
 libluajit-5.1.so.2:luaL_prepbuffer
+libluajit-5.1.so.2:luaL_pushmodule
 libluajit-5.1.so.2:luaL_pushresult
 libluajit-5.1.so.2:luaL_ref
 libluajit-5.1.so.2:luaL_register
+libluajit-5.1.so.2:luaL_setfuncs
+libluajit-5.1.so.2:luaL_setmetatable
+libluajit-5.1.so.2:luaL_testudata
 libluajit-5.1.so.2:luaL_traceback
 libluajit-5.1.so.2:luaL_typerror
 libluajit-5.1.so.2:luaL_unref
@@ -45,6 +52,7 @@ libluajit-5.1.so.2:lua_call
 libluajit-5.1.so.2:lua_checkstack
 libluajit-5.1.so.2:lua_close
 libluajit-5.1.so.2:lua_concat
+libluajit-5.1.so.2:lua_copy
 libluajit-5.1.so.2:lua_cpcall
 libluajit-5.1.so.2:lua_createtable
 libluajit-5.1.so.2:lua_dump
@@ -69,6 +77,7 @@ libluajit-5.1.so.2:lua_iscfunction
 libluajit-5.1.so.2:lua_isnumber
 libluajit-5.1.so.2:lua_isstring
 libluajit-5.1.so.2:lua_isuserdata
+libluajit-5.1.so.2:lua_isyieldable
 libluajit-5.1.so.2:lua_lessthan
 libluajit-5.1.so.2:lua_load
 libluajit-5.1.so.2:lua_loadx
@@ -111,8 +120,10 @@ libluajit-5.1.so.2:lua_status
 libluajit-5.1.so.2:lua_toboolean
 libluajit-5.1.so.2:lua_tocfunction
 libluajit-5.1.so.2:lua_tointeger
+libluajit-5.1.so.2:lua_tointegerx
 libluajit-5.1.so.2:lua_tolstring
 libluajit-5.1.so.2:lua_tonumber
+libluajit-5.1.so.2:lua_tonumberx
 libluajit-5.1.so.2:lua_topointer
 libluajit-5.1.so.2:lua_tothread
 libluajit-5.1.so.2:lua_touserdata
@@ -120,6 +131,7 @@ libluajit-5.1.so.2:lua_type
 libluajit-5.1.so.2:lua_typename
 libluajit-5.1.so.2:lua_upvalueid
 libluajit-5.1.so.2:lua_upvaluejoin
+libluajit-5.1.so.2:lua_version
 libluajit-5.1.so.2:lua_xmove
 libluajit-5.1.so.2:lua_yield
 libluajit-5.1.so.2:luaopen_base
