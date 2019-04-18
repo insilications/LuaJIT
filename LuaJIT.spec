@@ -4,10 +4,10 @@
 #
 Name     : LuaJIT
 Version  : 2.0.5
-Release  : 6
+Release  : 7
 URL      : http://luajit.org/download/LuaJIT-2.0.5.tar.gz
 Source0  : http://luajit.org/download/LuaJIT-2.0.5.tar.gz
-Summary  : Just-in-time compiler for Lua
+Summary  : Just-in-time compiler and drop-in replacement for Lua 5.1
 Group    : Development/Tools
 License  : MIT
 Requires: LuaJIT-bin = %{version}-%{release}
@@ -46,6 +46,7 @@ Requires: LuaJIT-lib = %{version}-%{release}
 Requires: LuaJIT-bin = %{version}-%{release}
 Requires: LuaJIT-data = %{version}-%{release}
 Provides: LuaJIT-devel = %{version}-%{release}
+Requires: LuaJIT = %{version}-%{release}
 
 %description dev
 dev components for the LuaJIT package.
@@ -86,13 +87,19 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1554422960
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1555597962
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 make  %{?_smp_mflags} MULTILIB=lib64
 
 
 %install
-export SOURCE_DATE_EPOCH=1554422960
+export SOURCE_DATE_EPOCH=1555597962
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/LuaJIT
 cp COPYRIGHT %{buildroot}/usr/share/package-licenses/LuaJIT/COPYRIGHT
