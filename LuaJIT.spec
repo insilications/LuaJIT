@@ -4,10 +4,10 @@
 #
 Name     : LuaJIT
 Version  : 2.1.0.beta3
-Release  : 10
+Release  : 11
 URL      : http://luajit.org/download/LuaJIT-2.1.0-beta3.tar.gz
 Source0  : http://luajit.org/download/LuaJIT-2.1.0-beta3.tar.gz
-Summary  : Just-in-time compiler for Lua
+Summary  : Just-in-time compiler and drop-in replacement for Lua 5.1
 Group    : Development/Tools
 License  : MIT
 Requires: LuaJIT-bin = %{version}-%{release}
@@ -46,6 +46,7 @@ Requires: LuaJIT-lib = %{version}-%{release}
 Requires: LuaJIT-bin = %{version}-%{release}
 Requires: LuaJIT-data = %{version}-%{release}
 Provides: LuaJIT-devel = %{version}-%{release}
+Requires: LuaJIT = %{version}-%{release}
 Requires: LuaJIT = %{version}-%{release}
 
 %description dev
@@ -86,8 +87,10 @@ man components for the LuaJIT package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1555610179
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1571240017
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -95,17 +98,18 @@ export CFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-m
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -ffat-lto-objects -flto=4 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-make  %{?_smp_mflags} amalg MULTILIB=lib64
+make  %{?_smp_mflags}  amalg MULTILIB=lib64
 
 
 %install
-export SOURCE_DATE_EPOCH=1555610179
+export SOURCE_DATE_EPOCH=1571240017
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/LuaJIT
-cp COPYRIGHT %{buildroot}/usr/share/package-licenses/LuaJIT/COPYRIGHT
+cp %{_builddir}/LuaJIT-2.1.0-beta3/COPYRIGHT %{buildroot}/usr/share/package-licenses/LuaJIT/b96e6d0f0634286f35de0ee179627ed03085f2b9
 %make_install MULTILIB=lib64
 ## install_append content
 ln -sf luajit-2.1.0-beta3 %{buildroot}/usr/bin/luajit
+cp src/*.h %{buildroot}/usr/include/luajit-2.1/
 ## install_append end
 
 %files
@@ -139,6 +143,77 @@ ln -sf luajit-2.1.0-beta3 %{buildroot}/usr/bin/luajit
 %files dev
 %defattr(-,root,root,-)
 /usr/include/luajit-2.1/lauxlib.h
+/usr/include/luajit-2.1/lj_alloc.h
+/usr/include/luajit-2.1/lj_arch.h
+/usr/include/luajit-2.1/lj_asm.h
+/usr/include/luajit-2.1/lj_asm_arm.h
+/usr/include/luajit-2.1/lj_asm_arm64.h
+/usr/include/luajit-2.1/lj_asm_mips.h
+/usr/include/luajit-2.1/lj_asm_ppc.h
+/usr/include/luajit-2.1/lj_asm_x86.h
+/usr/include/luajit-2.1/lj_bc.h
+/usr/include/luajit-2.1/lj_bcdef.h
+/usr/include/luajit-2.1/lj_bcdump.h
+/usr/include/luajit-2.1/lj_buf.h
+/usr/include/luajit-2.1/lj_carith.h
+/usr/include/luajit-2.1/lj_ccall.h
+/usr/include/luajit-2.1/lj_ccallback.h
+/usr/include/luajit-2.1/lj_cconv.h
+/usr/include/luajit-2.1/lj_cdata.h
+/usr/include/luajit-2.1/lj_char.h
+/usr/include/luajit-2.1/lj_clib.h
+/usr/include/luajit-2.1/lj_cparse.h
+/usr/include/luajit-2.1/lj_crecord.h
+/usr/include/luajit-2.1/lj_ctype.h
+/usr/include/luajit-2.1/lj_debug.h
+/usr/include/luajit-2.1/lj_def.h
+/usr/include/luajit-2.1/lj_dispatch.h
+/usr/include/luajit-2.1/lj_emit_arm.h
+/usr/include/luajit-2.1/lj_emit_arm64.h
+/usr/include/luajit-2.1/lj_emit_mips.h
+/usr/include/luajit-2.1/lj_emit_ppc.h
+/usr/include/luajit-2.1/lj_emit_x86.h
+/usr/include/luajit-2.1/lj_err.h
+/usr/include/luajit-2.1/lj_errmsg.h
+/usr/include/luajit-2.1/lj_ff.h
+/usr/include/luajit-2.1/lj_ffdef.h
+/usr/include/luajit-2.1/lj_ffrecord.h
+/usr/include/luajit-2.1/lj_folddef.h
+/usr/include/luajit-2.1/lj_frame.h
+/usr/include/luajit-2.1/lj_func.h
+/usr/include/luajit-2.1/lj_gc.h
+/usr/include/luajit-2.1/lj_gdbjit.h
+/usr/include/luajit-2.1/lj_ir.h
+/usr/include/luajit-2.1/lj_ircall.h
+/usr/include/luajit-2.1/lj_iropt.h
+/usr/include/luajit-2.1/lj_jit.h
+/usr/include/luajit-2.1/lj_lex.h
+/usr/include/luajit-2.1/lj_lib.h
+/usr/include/luajit-2.1/lj_libdef.h
+/usr/include/luajit-2.1/lj_mcode.h
+/usr/include/luajit-2.1/lj_meta.h
+/usr/include/luajit-2.1/lj_obj.h
+/usr/include/luajit-2.1/lj_parse.h
+/usr/include/luajit-2.1/lj_profile.h
+/usr/include/luajit-2.1/lj_recdef.h
+/usr/include/luajit-2.1/lj_record.h
+/usr/include/luajit-2.1/lj_snap.h
+/usr/include/luajit-2.1/lj_state.h
+/usr/include/luajit-2.1/lj_str.h
+/usr/include/luajit-2.1/lj_strfmt.h
+/usr/include/luajit-2.1/lj_strscan.h
+/usr/include/luajit-2.1/lj_tab.h
+/usr/include/luajit-2.1/lj_target.h
+/usr/include/luajit-2.1/lj_target_arm.h
+/usr/include/luajit-2.1/lj_target_arm64.h
+/usr/include/luajit-2.1/lj_target_mips.h
+/usr/include/luajit-2.1/lj_target_ppc.h
+/usr/include/luajit-2.1/lj_target_x86.h
+/usr/include/luajit-2.1/lj_trace.h
+/usr/include/luajit-2.1/lj_traceerr.h
+/usr/include/luajit-2.1/lj_udata.h
+/usr/include/luajit-2.1/lj_vm.h
+/usr/include/luajit-2.1/lj_vmevent.h
 /usr/include/luajit-2.1/lua.h
 /usr/include/luajit-2.1/lua.hpp
 /usr/include/luajit-2.1/luaconf.h
@@ -154,7 +229,7 @@ ln -sf luajit-2.1.0-beta3 %{buildroot}/usr/bin/luajit
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/LuaJIT/COPYRIGHT
+/usr/share/package-licenses/LuaJIT/b96e6d0f0634286f35de0ee179627ed03085f2b9
 
 %files man
 %defattr(0644,root,root,0755)
