@@ -4,7 +4,7 @@
 #
 Name     : LuaJIT
 Version  : 2.1.0.beta3
-Release  : 11
+Release  : 12
 URL      : http://luajit.org/download/LuaJIT-2.1.0-beta3.tar.gz
 Source0  : http://luajit.org/download/LuaJIT-2.1.0-beta3.tar.gz
 Summary  : Just-in-time compiler and drop-in replacement for Lua 5.1
