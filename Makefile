@@ -1,5 +1,5 @@
 PKG_NAME := LuaJIT
-URL = git@github.com:insilications/luajit-clr.git
+URL = https://github.com/insilications/luajit-clr.git
 ARCHIVES = 
 ARCHIVES_GIT = 
 

@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : LuaJIT
 Version  : 2.1.0.beta3
-Release  : 14
+Release  : 15
 URL      : file:///aot/build/clearlinux/packages/LuaJIT/LuaJIT-v2.1.0-beta3.tar.gz
 Source0  : file:///aot/build/clearlinux/packages/LuaJIT/LuaJIT-v2.1.0-beta3.tar.gz
 Summary  : Just-in-time compiler for Lua
@@ -184,7 +184,7 @@ unset https_proxy
 unset no_proxy
 export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1620944857
+export SOURCE_DATE_EPOCH=1620946678
 export GCC_IGNORE_WERROR=1
 ## altflags_pgo content
 ## pgo generate
@@ -237,6 +237,37 @@ make  %{?_smp_mflags}  amalg V=1 VERBOSE=1 MULTILIB=lib64 CFLAGS="${CFLAGS}" CXX
 
 #make install V=1 VERBOSE=1 PREFIX=$PWD MULTILIB=lib64 CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LDFLAGS="${LDFLAGS}"
 ./run-tests -j 16 $PWD || :
+src/luajit sort.lua || :
+src/luajit test_str_comp.lua || :
+src/luajit verybig.lua || :
+src/luajit bench/scimark-2010-12-20.lua -small || :
+src/luajit bench/scimark-2010-12-20.lua -large || :
+src/luajit bench/array3d.lua || :
+src/luajit bench/binary-trees.lua || :
+src/luajit bench/chameneos.lua || :
+src/luajit bench/coroutine-ring.lua || :
+src/luajit bench/euler14-bit.lua || :
+src/luajit bench/fannkuch.lua || :
+src/luajit bench/fasta.lua || :
+src/luajit bench/k-nucleotide.lua || :
+src/luajit bench/life.lua || :
+src/luajit bench/mandelbrot-bit.lua || :
+src/luajit bench/mandelbrot.lua || :
+src/luajit bench/md5.lua || :
+src/luajit bench/meteor.lua || :
+src/luajit bench/nbody.lua || :
+src/luajit bench/nsieve-bit-fp.lua || :
+src/luajit bench/nsieve-bit.lua || :
+src/luajit bench/nsieve.lua || :
+src/luajit bench/partialsums.lua || :
+src/luajit bench/pidigits-nogmp.lua || :
+src/luajit bench/ray.lua || :
+src/luajit bench/recursive-ack.lua || :
+src/luajit bench/recursive-fib.lua || :
+src/luajit bench/revcomp.lua || :
+src/luajit bench/series.lua || :
+src/luajit bench/spectral-norm.lua || :
+src/luajit bench/sum-file.lua || :
 make clean
 export CFLAGS="${CFLAGS_USE}"
 export CXXFLAGS="${CXXFLAGS_USE}"
@@ -247,7 +278,7 @@ make  %{?_smp_mflags}  amalg V=1 VERBOSE=1 MULTILIB=lib64 CFLAGS="${CFLAGS}" CXX
 
 
 %install
-export SOURCE_DATE_EPOCH=1620944857
+export SOURCE_DATE_EPOCH=1620946678
 rm -rf %{buildroot}
 %make_install V=1 VERBOSE=1 MULTILIB=lib64 CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LDFLAGS="${LDFLAGS}"
 ## install_append content
