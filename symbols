@@ -2,7 +2,7 @@ libluajit-5.1.so.2:luaJIT_profile_dumpstack
 libluajit-5.1.so.2:luaJIT_profile_start
 libluajit-5.1.so.2:luaJIT_profile_stop
 libluajit-5.1.so.2:luaJIT_setmode
-libluajit-5.1.so.2:luaJIT_version_2_1_0_beta3
+libluajit-5.1.so.2:luaJIT_version_2_1_0
 libluajit-5.1.so.2:luaL_addlstring
 libluajit-5.1.so.2:luaL_addstring
 libluajit-5.1.so.2:luaL_addvalue
@@ -144,4 +144,5 @@ libluajit-5.1.so.2:luaopen_math
 libluajit-5.1.so.2:luaopen_os
 libluajit-5.1.so.2:luaopen_package
 libluajit-5.1.so.2:luaopen_string
+libluajit-5.1.so.2:luaopen_string_buffer
 libluajit-5.1.so.2:luaopen_table
