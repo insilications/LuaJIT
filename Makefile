@@ -1,5 +1,6 @@
 PKG_NAME := LuaJIT
-URL = https://github.com/LuaJIT/LuaJIT.git
+URL = git@github.com:insilications/luajit-clr.git
 ARCHIVES = 
+ARCHIVES_GIT = 
 
 include ../common/Makefile.common

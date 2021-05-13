@@ -1,3 +1,35 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
 findutils
+binutils-dev
+buildreq-cmake
+doxygen
+elfutils-dev
+findutils
+gcc
+gcc-dev
+gcc-libs-math
+gcc-libstdc++32
+gcc-libubsan
+gcc-locale
+glibc-dev
+glibc-staticdev
+libgcc1
+libstdc++
+python3-dev
+python3-staticdev
+xz-dev
+xz-staticdev
+zlib-dev
+zlib-staticdev
+perl
+gtk3
+gtk3-dev
+mpc
+mpc-dev
+mpfr
+mpfr-dev
+perl-Parallel-ForkManager
+perl(Moo::Role)
+perl(Role::Tiny)
+perl(Sub::Quote)

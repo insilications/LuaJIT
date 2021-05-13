@@ -1,0 +1,2 @@
+make install V=1 VERBOSE=1 PREFIX=$PWD MULTILIB=lib64 CFLAGS="${CFLAGS}" CXXFLAGS="${CXXFLAGS}" LDFLAGS="${LDFLAGS}"
+./run-tests -j 16 $PWD || :
